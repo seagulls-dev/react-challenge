@@ -1,50 +1,38 @@
-import React, { Component } from 'react'
+import React, {Component, useEffect, useState, useRef} from 'react'
 import Button from '@material-ui/core/Button'
-import Api from '../Api'
+import Api from '../api'
 
-class MessageList extends Component {
-  constructor(...args) {
-    super(...args)
-    this.state = {
-      messages: [],
-    }
-  }
-
-  api = new Api({
-    messageCallback: (message) => {
-      this.messageCallback(message)
+const MessageList = props => {
+  const [messages, setMessages] = useState([])
+  const [api] = useState(new Api({
+    messageCallback: (msg) => {
+      messageCallback(msg)
     },
-  })
+  }))
 
-  componentDidMount() {
-    this.api.start()
+  useEffect(()=>{
+    api.start()
+  },[])
+
+  function messageCallback(msg) {
+    messages.push(msg)
+    setMessages([...messages])
+    console.log(messages)
   }
 
-  messageCallback(message) {
-    const { messages } = this.state
-    this.setState({
-      messages: [
-        ...messages.slice(),
-        message,
-      ],
-    }, () => {
-      // Included to support initial direction. Please remove upon completion
-      console.log(messages)
-    })
-  }
-
-  renderButton() {
-    const isApiStarted = this.api.isStarted()
+  function renderButton() {
+    const isApiStarted = api.isStarted()
     return (
       <Button
         variant="contained"
         onClick={() => {
           if (isApiStarted) {
-            this.api.stop()
+            api.stop()
           } else {
-            this.api.start()
+            api.start()
           }
-          this.forceUpdate()
+          //force update
+          setMessages([...messages])
         }}
       >
         {isApiStarted ? 'Stop Messages' : 'Start Messages'}
@@ -52,13 +40,13 @@ class MessageList extends Component {
     )
   }
 
-  render() {
-    return (
-      <div>
-        {this.renderButton()}
-      </div>
-    )
-  }
+
+  return (
+    <div>
+      {renderButton()}
+    </div>
+  )
+
 }
 
 export default MessageList
