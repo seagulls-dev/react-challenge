@@ -1,14 +1,19 @@
-## React Coding Challenge
-
-This code challenge tests your skills in react.js, testing and modular design.
-The purpose of the application is to correctly render a stream of messages coming from an api. Different messages will be coded different colors and require slightly different rendering. The rules are described in detail below.
-
-This challenge already includes an API response. It is not required or expected for you to make any changes to this interaction.
+# React Coding Challenge
 
 The 3 priorities that we provide you are:
   * 1 = error
   * 2 = warning
   * 3 = info
+
+## How to run
+
+1. npm install 
+
+if it fails, try npm install --legacy-peer-deps
+
+2. npm start
+
+It listens localhost:3000
 
 ### Acceptance Criteria
 
@@ -38,5 +43,3 @@ The 3 priorities that we provide you are:
 9. Test your application to the degree that you feel comfortable with. No specific testing frameworks are required.
 10. Use functional components. If possible, change MessageList to functional component
 11. Improve code structure. Your implementation should be more like how you do it for any production grade application development
-
-***Applicants are provided this challenge with no expectation on deadline. Please take the time you need to complete the challenge to the best of your ability.***
