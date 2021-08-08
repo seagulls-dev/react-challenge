@@ -4,10 +4,11 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button'
-import Typography from '@material-ui/core/Typography';
-import {colors} from "@material-ui/core";
 
-
+/**
+ * @author seagull
+ * @type {(data?: {theme?: DefaultTheme}) => Classes<"root"|"action">}
+ */
 const useStyle = createUseStyles({
     root : {
         margin : '1em',
@@ -18,6 +19,12 @@ const useStyle = createUseStyles({
     }
 })
 
+/**
+ * @author seagull
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const MessageItem = props => {
 
     const { content, type, idx, removes } = props;
@@ -28,6 +35,7 @@ const MessageItem = props => {
     }
     const classes = useStyle();
 
+    //call parent function via props
     const removeItem = (e, idx) => {
         removes(idx)
     }
@@ -35,14 +43,13 @@ const MessageItem = props => {
     return (
         <Card className={classes.root} style={{backgroundColor : backColors[type]}}>
             <CardContent>
-                {content} + {idx}
+                {content}
             </CardContent>
             <CardActions className={classes.action}>
                 <Button size="small" onClick={(e)=>removeItem(e,idx)}>Clear</Button>
             </CardActions>
         </Card>
     )
-
 }
 
 export default MessageItem
